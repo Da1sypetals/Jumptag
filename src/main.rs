@@ -1,3 +1,6 @@
+use colorful::Colorful;
+use interface::{cmd::Cmd, parser::parse_command};
+use script::{SCRIPT, SOURCE_CMD};
 use std::{
     env,
     fs::{self, File, OpenOptions},
@@ -5,14 +8,11 @@ use std::{
     path::Path,
     process::Termination,
 };
-
-use colorful::Colorful;
-use interface::{cmd::Cmd, parser::parse_command};
-use script::{CHECKER, SCRIPT};
 use tagbase::{
     errors::{ReportError, TagbaseError, TagbaseResult},
     tagbase::Tagbase,
 };
+
 mod interface;
 mod script;
 mod tagbase;
@@ -67,12 +67,10 @@ fn main() {
 
             let temp_file_path = jumptag_dir.join("temp");
 
-            // 创建或打开文件
             let mut file = File::create(&temp_file_path)
                 .map_err(|e| TagbaseError::Internal(e.to_string()))
                 .report();
 
-            // 根据 Result 的结果写入内容
             match res {
                 Ok(string) => file.write_all(format!("1 {}", string).as_bytes()),
                 Err(e) => file.write_all(format!("0 {}", e).as_bytes()),
@@ -103,13 +101,25 @@ fn main() {
                 .map_err(|e| TagbaseError::Internal(e.to_string()))
                 .report();
 
-            if content.contains(CHECKER) {
-                uinfo("already initialized!".into());
-            } else {
-                ReportError::report(
-                    write!(file, "{}", SCRIPT).map_err(|e| TagbaseError::Internal(e.to_string())),
-                );
-            }
+            let home_path = env::var("HOME")
+                .map_err(|e| TagbaseError::Internal(e.to_string()))
+                .report();
+
+            let jumptag_dir = Path::new(&home_path).join(".jumptag").join(".extension");
+
+            let mut ext_cfg = File::create(jumptag_dir)
+                .map_err(|e| TagbaseError::Internal(e.to_string()))
+                .report();
+
+            ReportError::report(
+                ext_cfg
+                    .write_all(SCRIPT)
+                    .map_err(|e| TagbaseError::Internal(e.to_string())),
+            );
+
+            ReportError::report(
+                write!(file, "{}", SOURCE_CMD).map_err(|e| TagbaseError::Internal(e.to_string())),
+            );
         }
     }
 }

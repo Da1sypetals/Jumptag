@@ -17,6 +17,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # 复制编译后的二进制文件到/usr/bin/
-sudo cp target/$BUILD_MODE/jt-inner /usr/bin/
+cp target/$BUILD_MODE/jt ./jt-inner
+sudo cp target/$BUILD_MODE/jt /usr/bin/jt-inner
 
 echo "[jt install] compile and install completed."

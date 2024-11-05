@@ -8,7 +8,7 @@ readme = "README.md"
 repository = "https://github.com/Da1sypetals/jumptag"
 
 [[bin]]
-name = "jt-inner"
+name = "jt"
 path = "src/main.rs"
 
 [dependencies]
@@ -16,3 +16,4 @@ redb = "2.2.0"
 thiserror = "1.0.68"
 clap = { version = "4.5.20", features = ["derive", "cargo"] }
 colorful = "0.3.2"
+regex = "1.11.1"

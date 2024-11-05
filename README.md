@@ -15,27 +15,42 @@ jt-inner init <your_rc_file>
 ```
 ### Use
 An example in an interactive shell (zsh) :
-```
-~/dev/rs > jt ls
-[jump-tag] (3 bindings)
-dev => /home/da1sypetals/dev
-docs => /home/da1sypetals/dev/docs
-rs => /home/da1sypetals/dev/rs
+- Currently we have bindings:
+  ```sh
+  ~/dev/rs > jt -ls
+  [jump-tag] (3 bindings)
+  desk => /mnt/a/Desktop
+  dev => /home/da1sypetals/dev
+  rs => /home/da1sypetals/dev/rs
+  ```
+- Create a new one and jump to it!
+  ```sh
+  ~/dev/rs > jt desk
 
-~/dev/rs > jt dev
+  /mnt/a/Desktop > jt -add docs ~/dev/docs
 
-~/dev > jt rs
+  /mnt/a/Desktop > jt docs
+  ```
+- Now delete an existing one!
+  ```sh
+  ~/dev/docs > jt dev
 
-~/dev/rs > jt docs
+  ~/dev > jt -del dev
 
-~/dev/docs > jt add desktop /mnt/a/Desktop
+  ~/dev > jt rs
 
-~/dev/docs > jt desktop
+  ```
+- And jump to it...
+  ```sh
+  ~/dev/rs > jt dev
+  [jump-tag] failed: jump-tag: tag not found: dev
+  ```
 
-/mnt/a/Desktop > jt del desktop
-
-/mnt/a/Desktop > jt dev
-
-~/dev > jt desktop
-[jump-tag] failed: jump-tag: tag not found: desktop
-```
+- Finally, see what we have now!
+  ```sh
+  ~/dev/rs > jt -ls
+  [jump-tag] (3 bindings)
+  desk => /mnt/a/Desktop
+  docs => /home/da1sypetals/dev/docs
+  rs => /home/da1sypetals/dev/rs
+  ```
