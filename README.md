@@ -10,7 +10,7 @@
 ### Initialize
 ```sh
 # to initialize
-jt-inner init <your_rc_file>
+jt-inner -init <your_rc_file>
 # please restart your shell right after
 ```
 ### Use
@@ -43,7 +43,7 @@ An example in an interactive shell (zsh) :
 - And jump to it...
   ```sh
   ~/dev/rs > jt dev
-  [jump-tag] failed: jump-tag: tag not found: dev
+  [jump-tag] failed: tag not found: dev
   ```
 
 - Finally, see what we have now!
