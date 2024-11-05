@@ -1,6 +1,6 @@
 use colorful::Colorful;
 use interface::{cmd::Cmd, parser::parse_command};
-use script::{SCRIPT, SOURCE_CMD};
+use script::{CHECKER, SCRIPT, SOURCE_CMD};
 use std::{
     env,
     fs::{self, File, OpenOptions},
@@ -117,9 +117,19 @@ fn main() {
                     .map_err(|e| TagbaseError::Internal(e.to_string())),
             );
 
-            ReportError::report(
-                write!(file, "{}", SOURCE_CMD).map_err(|e| TagbaseError::Internal(e.to_string())),
-            );
+            let mut rc_file = String::new();
+            file.read_to_string(&mut rc_file)
+                .map_err(|e| TagbaseError::Internal(e.to_string()))
+                .report();
+
+            if rc_file.contains(CHECKER) {
+                uinfo("already configured!".into());
+            } else {
+                ReportError::report(
+                    write!(file, "{}", SOURCE_CMD)
+                        .map_err(|e| TagbaseError::Internal(e.to_string())),
+                );
+            }
         }
     }
 }
