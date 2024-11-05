@@ -1,5 +1,5 @@
 [package]
-name = "jt"
+name = "jumptag"
 version = "0.1.0"
 edition = "2021"
 description = "Jump to directory using tags as shorthand."
