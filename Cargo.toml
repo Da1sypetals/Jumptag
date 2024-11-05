@@ -1,0 +1,10 @@
+[package]
+name = "jt-inner"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+redb = "2.2.0"
+thiserror = "1.0.68"
+clap = { version = "4.5.20", features = ["derive", "cargo"] }
+colorful = "0.3.2"
