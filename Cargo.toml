@@ -2,6 +2,10 @@
 name = "jt-inner"
 version = "0.1.0"
 edition = "2021"
+description = "Jump to directory using tags as shorthand."
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/Da1sypetals/jumptag"
 
 [dependencies]
 redb = "2.2.0"
