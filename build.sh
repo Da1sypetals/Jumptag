@@ -38,10 +38,10 @@ fi
 
 # 复制编译后的二进制文件到~/.jumptag/bin/
 mkdir -p ~/.jumptag/bin
-cp target/$BUILD_MODE/jt ~/.jumptag/bin/jt-inner
+cp target/$BUILD_MODE/jumptag ~/.jumptag/bin/jumptag
 
-# 初始化并加载rc文件
-~/.jumptag/bin/jt-inner -init "$1"
+# 初始化并加载rc文件  
+~/.jumptag/bin/jumptag -init "$1"
 
 if [ $? -ne 0 ]; then
   echo "[jt install] initialization failed."

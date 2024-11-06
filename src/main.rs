@@ -88,16 +88,17 @@ fn main() {
             uinfo(format!("({} bindings) {}", binds.len(), binds.join("")));
         }
         Cmd::Init { filename } => {
-            let mut file = OpenOptions::new()
+            let mut rc_file = OpenOptions::new()
                 .read(true)
                 .write(true)
                 .append(true)
-                .open(filename)
+                .open(&filename)
                 .map_err(|e| TagbaseError::Internal(e.to_string()))
                 .report();
 
             let mut content = String::new();
-            file.read_to_string(&mut content)
+            rc_file
+                .read_to_string(&mut content)
                 .map_err(|e| TagbaseError::Internal(e.to_string()))
                 .report();
 
@@ -117,16 +118,15 @@ fn main() {
                     .map_err(|e| TagbaseError::Internal(e.to_string())),
             );
 
-            let mut rc_file = String::new();
-            file.read_to_string(&mut rc_file)
+            let rc_file_str = fs::read_to_string(&filename)
                 .map_err(|e| TagbaseError::Internal(e.to_string()))
                 .report();
 
-            if rc_file.contains(CHECKER) {
+            if rc_file_str.contains(CHECKER) {
                 uinfo("already configured!".into());
             } else {
                 ReportError::report(
-                    write!(file, "{}", SOURCE_CMD)
+                    write!(rc_file, "{}", SOURCE_CMD)
                         .map_err(|e| TagbaseError::Internal(e.to_string())),
                 );
             }

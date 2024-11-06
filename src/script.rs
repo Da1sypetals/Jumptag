@@ -15,7 +15,7 @@ source ~/.jumptag/.extension
 # ##########################################################################################
 "####;
 
-pub(crate) const CHECKER: &str = r#"source ~/.jumptag/.extension"#;
+pub(crate) const CHECKER: &str = "source ~/.jumptag/.extension";
 
 pub(crate) const SCRIPT: &[u8] = r####"
 # ##########################################################################################
@@ -25,7 +25,7 @@ pub(crate) const SCRIPT: &[u8] = r####"
 # ##########################################################################################
 
 jt() {
-    jt-inner "$@"
+    jumptag "$@"
 
     if [[ "$1" != "-add" && "$1" != "-ls" && "$1" != "-init" && "$1" != "-del" && "$1" != "" ]]; then
         if [ -f ~/.jumptag/temp ]; then

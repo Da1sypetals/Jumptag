@@ -1,6 +1,6 @@
 [package]
 name = "jumptag"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 description = "Jump to directory using tags as shorthand."
 license = "MIT OR Apache-2.0"
@@ -8,7 +8,7 @@ readme = "README.md"
 repository = "https://github.com/Da1sypetals/jumptag"
 
 [[bin]]
-name = "jt"
+name = "jumptag"
 path = "src/main.rs"
 
 [dependencies]
