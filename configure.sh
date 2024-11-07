@@ -4,6 +4,7 @@ if [ $# -lt 1 ]; then
 fi
 
 mkdir -p ~/.jumptag/bin
-cp ./jt-inner ~/.jumptag/bin
+cp ./jumptag ~/.jumptag/bin
 
-~/.jumptag/bin/jt-inner -init "$1"
+chmod +x ~/.jumptag/bin/jumptag
+~/.jumptag/bin/jumptag -init "$1"
